@@ -3,12 +3,35 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "agreements-mock": "npm i json-server@0.17.4 && json-server --watch agreements.json --port 8080",
+    "schemas-mock": "npm i json-server@0.17.4 && json-server --watch schemas.json --port 8081"
   },
   "dependencies": {
+    "@opentelemetry/api": "^1.4.1",
+    "@opentelemetry/auto-instrumentations-node": "^0.38.0",
+    "@opentelemetry/exporter-zipkin": "^2.0.0",
+    "@opentelemetry/instrumentation": "^0.200.0",
+    "@opentelemetry/instrumentation-express": "^0.48.0",
+    "@opentelemetry/instrumentation-http": "^0.200.0",
+    "@opentelemetry/instrumentation-winston": "^0.32.0",
+    "@opentelemetry/resources": "^1.8.0",
+    "@opentelemetry/sdk-trace-base": "^1.8.0",
+    "@opentelemetry/sdk-trace-node": "^1.8.0",
+    "@opentelemetry/semantic-conventions": "^1.30.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "morgan": "~1.9.1"
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-winston": "^4.2.0",
+    "helmet": "^8.1.0",
+    "json-server": "^1.0.0-beta.3",
+    "morgan": "~1.9.1",
+    "node-cache": "^5.1.2",
+    "on-finished": "^2.4.1",
+    "opentelemetry-instrumentation-express": "^0.39.1",
+    "winston": "^3.10.0"
   }
 }
