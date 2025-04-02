@@ -1,7 +1,7 @@
 const Ajv = require('ajv');
 const logger = require('../application/logger').logger;
-const fetchAgreement  = require('./AgreementClient');
-const getSchema  = require('./JsonSchemaRegistryClient');
+const fetchAgreement  = require('./AgreementClient').fetchAgreement;
+const getSchema  = require('./JsonSchemaRegistryClient').getSchema;
 const validator = require('./validator');
 
 // Funkcja walidująca JSON przy użyciu schematu

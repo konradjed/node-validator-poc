@@ -1,0 +1,42 @@
+{
+  "jsons": [
+    {
+      "id": "adminUser",
+      "metadata": { "agreementSchema": "roleBasedSchema" },
+      "userType": "admin",
+      "permissions": ["read", "write", "delete"],
+      "adminSecret": "supersecure123"
+    },
+    {
+      "id": "adminUserfailed",
+      "metadata": { "agreementSchema": "roleBasedSchema" },
+      "userType": "admin",
+      "permissions": ["read", "write", "delete"]
+    },
+    {
+      "id": "normalUser",
+      "metadata": { "agreementSchema": "roleBasedSchema" },
+      "userType": "user",
+      "permissions": ["read"]
+    },
+    {
+      "id": "guestUser",
+      "metadata": { "agreementSchema": "roleBasedSchema" },
+      "userType": "guest"
+    },
+    {
+      "id": "businessCustomer",
+      "metadata": { "agreementSchema": "customerTypeSchema" },
+      "customerType": "business",
+      "companyName": "TechCorp",
+      "vatId": "PL1234567890"
+    },
+    {
+      "id": "personalCustomer",
+      "metadata": { "agreementSchema": "customerTypeSchema" },
+      "customerType": "personal",
+      "fullName": "John Doe",
+      "dateOfBirth": "1985-07-20"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 const { trace, context, propagation, SpanStatusCode } = require('@opentelemetry/api');
-const logger = require('../application/logger');
+const logger = require('../application/logger').logger;
 const {configMap} = require("../application/config");
 
 const defaultHeaders = {

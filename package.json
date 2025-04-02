@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "agreements-mock": "npm i json-server@0.17.4 && json-server --watch agreements.json --port 8080",
-    "schemas-mock": "npm i json-server@0.17.4 && json-server --watch schemas.json --port 8081"
+    "schemas-mock": "npm i json-server@0.17.4 && json-server -i '$id' --watch schemas.json --port 8081"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.4.1",
@@ -27,7 +27,7 @@
     "express": "^4.18.2",
     "express-winston": "^4.2.0",
     "helmet": "^8.1.0",
-    "json-server": "^1.0.0-beta.3",
+    "json-server": "^0.17.4",
     "morgan": "~1.9.1",
     "node-cache": "^5.1.2",
     "on-finished": "^2.4.1",

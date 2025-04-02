@@ -1,0 +1,104 @@
+{
+  "schemas": [
+    {
+      "$id": "roleBasedSchema",
+      "type": "object",
+      "properties": {
+        "userType": {
+          "type": "string",
+          "enum": [
+            "admin",
+            "user",
+            "guest"
+          ]
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "adminSecret": {
+          "type": "string"
+        }
+      },
+      "if": {
+        "properties": {
+          "userType": {
+            "const": "admin"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "adminSecret"
+        ]
+      },
+      "else": {
+        "if": {
+          "properties": {
+            "userType": {
+              "const": "guest"
+            }
+          }
+        },
+        "then": {
+          "required": [],
+          "properties": {
+            "permissions": {
+              "const": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "customerTypeSchema",
+      "$id": "customerTypeSchema",
+      "type": "object",
+      "properties": {
+        "customerType": {
+          "type": "string",
+          "enum": [
+            "business",
+            "personal"
+          ]
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "vatId": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}[0-9]{10}$"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "if": {
+        "properties": {
+          "customerType": {
+            "const": "business"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "companyName",
+          "vatId"
+        ]
+      },
+      "else": {
+        "required": [
+          "fullName",
+          "dateOfBirth"
+        ]
+      }
+    }
+  ]
+}

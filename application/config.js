@@ -1,4 +1,3 @@
-const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
 
@@ -13,65 +12,26 @@ class Config {
         SERVIE_NAME: 'agreement-validator'
     };
 
+    static loadedConfig = {};
+
     static loadConfig() {
-        const configPath = path.join(__dirname, 'config.json');
-        let fileConfig = {};
-
-        if (fs.existsSync(configPath)) {
-            const rawConfig = fs.readFileSync(configPath);
-            const parsedConfig = JSON.parse(rawConfig);
-
-            for (const key of Object.keys(parsedConfig)) {
-                if (key in Config.configMap) {
-                    Config.configMap[key] = parsedConfig[key];
-                } else {
-                    console.warn(`Ignoring unsupported config parameter in file: ${key}`);
-                }
-            }
-        }
-
-        for (const key of Object.keys(Config.configMap)) {
-            if (process.env[key]) {
-                Config.configMap[key] = process.env[key];
-            }
+        for (const param in Config.configMap) {
+            Config.loadedConfig[param] = process.env[param] || Config.configMap[param];
         }
     }
 
     static get(param) {
-        if (!(param in Config.configMap)) {
+        if (Object.keys(Config.loadedConfig).length === 0) {
+            Config.loadConfig();
+        }
+
+        if (!(param in Config.loadedConfig)) {
             console.warn(`Attempted to access unsupported config parameter: ${param}`);
             return undefined;
         }
 
-        return Config.configMap[param];
+        return Config.loadedConfig[param];
     }
 }
-
-// Load config on initialization
-Config.load = () => {
-    Config.configMap = { PORT: null, JSON_SERVICE_URL: null, SCHEMA_SERVICE_URL: null };
-    const configPath = path.join(__dirname, 'config.json');
-
-    if (fs.existsSync(configPath)) {
-        const fileConfig = JSON.parse(fs.readFileSync(configPath));
-
-        for (const [key, value] of Object.entries(fileConfig)) {
-            if (key in Config.configMap) {
-                Config.configMap[key] = value;
-            } else {
-                console.warn(`Ignoring unsupported config parameter in file: ${key}`);
-            }
-        }
-    }
-
-    for (const key of Object.keys(Config.configMap)) {
-        if (process.env[key]) {
-            Config.configMap[key] = process.env[key];
-        }
-    }
-};
-
-// Initial config load
-Config.load();
 
 module.exports = Config;
