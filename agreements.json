@@ -37,6 +37,38 @@
       "customerType": "personal",
       "fullName": "John Doe",
       "dateOfBirth": "1985-07-20"
+    },
+    {
+      "id": "personalCustomerBad",
+      "metadata": {
+        "agreementSchema": "customerTypeSchema"
+      },
+      "customerType": "business",
+      "companyName": "Acme Corp",
+      "vatId": "DE12345",
+      "fullName": "Alice Smith"
+    },
+    {
+      "id": "personalCustomerBad",
+      "metadata": {
+        "agreementSchema": "advancedValidationSchema"
+      },
+      "name": "Anna Kowalska",
+      "pesel": "44051401359",
+      "phone": "+48123456789",
+      "iban": "PL61109010140000071219812874",
+      "dateOfBirth": "1990-05-20"
+    },
+    {
+      "id": "userWithInvalidData",
+      "metadata": {
+        "agreementSchema": "advancedValidationSchema"
+      },
+      "name": "Błędne Dane",
+      "pesel": "12345678901",
+      "phone": "abc",
+      "iban": "XYZ1234567890",
+      "dateOfBirth": "20-05-1990"
     }
   ]
 }

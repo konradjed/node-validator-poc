@@ -15,7 +15,7 @@ const getSchema = async (schemaName) => {
         const url = `${Config.configMap.SCHEMA_SERVICE_URL}/${schemaName}`;
         logger.debug({ message: 'Fetching schema from external service', schemaName, url });
         schema = await makeAPICall({ method: 'GET', url });
-        schemaCache.set(cacheKey, schema);
+        // schemaCache.set(cacheKey, schema);
         logger.debug({ message: 'Schema cached', schemaName });
     }
     return schema;

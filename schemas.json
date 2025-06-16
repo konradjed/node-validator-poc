@@ -54,7 +54,63 @@
       }
     },
     {
-      "name": "customerTypeSchema",
+      "$id": "roleBasedSchema-v2",
+      "type": "object",
+      "properties": {
+        "userType": {
+          "type": "string",
+          "enum": [
+            "admin",
+            "user",
+            "guest"
+          ]
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "adminSecret": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "if": {
+        "properties": {
+          "userType": {
+            "const": "admin"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "adminSecret"
+        ]
+      },
+      "else": {
+        "if": {
+          "properties": {
+            "userType": {
+              "const": "guest"
+            }
+          }
+        },
+        "then": {
+          "required": [],
+          "properties": {
+            "permissions": {
+              "const": []
+            }
+          }
+        }
+      },
+      "required": [ "username"]
+    },
+    {
       "$id": "customerTypeSchema",
       "type": "object",
       "properties": {
@@ -99,6 +155,18 @@
           "dateOfBirth"
         ]
       }
+    },
+    {
+      "$id": "advancedValidationSchema",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 3 },
+        "pesel": { "type": "string", "format": "pesel" },
+        "phone": { "type": "string", "format": "phone-number" },
+        "iban": { "type": "string", "format": "iban" },
+        "dateOfBirth": { "type": "string", "format": "date-of-birth" }
+      },
+      "required": ["name", "pesel", "phone", "iban", "dateOfBirth"]
     }
   ]
 }
